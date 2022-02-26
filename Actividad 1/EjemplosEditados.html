@@ -9,6 +9,11 @@
   <script src="https://cdn.jsdelivr.net/remarkable/1.7.1/remarkable.min.js"></script>
   <!-- Don't use this in production: -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    li {
+      list-style-type: upper-alpha
+    }
+  </style>
 </head>
 
 <body>
@@ -190,11 +195,16 @@
                 value={this.state.text}
               />
               <button>
-                Add #{this.state.items.length + 1}
+                Add {String.fromCharCode(65 + this.state.items.length)}
               </button>
             </form>
           </div>
         );
+      }
+
+      checkLetter() {
+
+        return String.fromCharCode();
       }
 
       handleChange(e) {
@@ -237,7 +247,10 @@
     class MarkdownEditor extends React.Component {
       constructor(props) {
         super(props);
-        this.md = new Remarkable();
+        this.md = new Remarkable({
+          html: true, 
+        });
+
         this.handleChange = this.handleChange.bind(this);
         this.state = { value: 'Hello, **world**!' };
       }
